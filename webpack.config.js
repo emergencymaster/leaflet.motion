@@ -4,7 +4,8 @@ var PACKAGE = require('./package.json');
 var banner = '\n ' + PACKAGE.name + ' - v' + PACKAGE.version + ' (' + PACKAGE.homepage +') ' +
              '\n ' + PACKAGE.description + '\n ' +
              '\n ' + PACKAGE.license +
-             '\n (c) ' + new Date().getFullYear() + '  ' + PACKAGE.author + '\n';
+             '\n (c) ' + new Date().getFullYear() + '  ' + PACKAGE.author + 
+			 '\n ' + 'Modified for own use cases by EmergencyMasterNET';
 
 var pluginFiles = [
 	'./src/leaflet.motion.js',

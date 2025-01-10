@@ -53,6 +53,7 @@ L.Motion.Utils = {
 			var singlePoint = latLngs[0] instanceof L.LatLng ? latLngs[0] : L.latLng(latLngs[0]);
 			return {
 				traveledPath: [singlePoint],
+				remainingPath: latLngs,
 				latLng: singlePoint
 			};
 		}
@@ -60,6 +61,7 @@ L.Motion.Utils = {
 		if (ratio == 1) {
 			return {
 				traveledPath: latLngs,
+				remainingPath: [],
 				latLng: latLngs[latLngs.length -1] instanceof L.LatLng ? latLngs[latLngs.length -1] : L.latLng(latLngs[latLngs.length -1])
 			};
 		}
@@ -91,9 +93,11 @@ L.Motion.Utils = {
 		var segmentRatio = ((cumulativeDistanceToB - cumulativeDistanceToA) !== 0) ? ((ratioDist - cumulativeDistanceToA) / (cumulativeDistanceToB - cumulativeDistanceToA)) : 0;
 		var interpolatedPoint = this.interpolateOnLatLngSegment(pointA, pointB, segmentRatio);
 		var traveledPath = latLngs.slice(0, i);
-		traveledPath.push(interpolatedPoint);
+		traveledPath.push(interpolatedPoint); 
+		var remainingPath = latLngs.slice(i);
 		return {
 			traveledPath: traveledPath,
+			remainingPath: remainingPath,
 			latLng: interpolatedPoint
 		};
 	},

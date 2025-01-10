@@ -24,7 +24,8 @@ L.Motion.Animate = {
 		auto: false,
 		easing: function(x){ return x; }, // linear
 		speed: 0, // KM/H
-		duration: 0 // ms
+		duration: 0, // ms,
+		polylineDirection: "auto"
 	},
 
 	markerOptions: undefined,
@@ -124,7 +125,8 @@ L.Motion.Animate = {
 			durationRatio = this.motionOptions.easing(durationRatio, ellapsedTime, 0, 1, this.motionOptions.duration);
 			var interpolatedLine = L.Motion.Utils.interpolateOnLine(this._map, this._linePoints, durationRatio);
 
-			this.setLatLngs(interpolatedLine.traveledPath);
+			console.log('test', interpolatedLine.remainingPath, interpolatedLine.traveledPath);
+			this.setLatLngs((this.motionOptions.polylineDirection === 'backward' ? interpolatedLine.remainingPath : interpolatedLine.traveledPath));
 			this._drawMarker(interpolatedLine.latLng);
 
 			if(this.options.onTick) { this.options.onTick.bind(this)(nextPoint); }
